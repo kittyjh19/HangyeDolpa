@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>운동 기록 입력</title>
+    <script>
+        async function handleExerciseSave(event) {
+            event.preventDefault();
+
+            // 각 입력 필드에서 데이터 가져오기
+            const exercisePlace = document.getElementById("exercisePlace").value;
+            const exerciseStage = document.getElementById("exerciseStage").value;
+            const exerciseCount = document.getElementById("exerciseCount").value;
+            const exerciseTime = document.getElementById("exerciseTime").value;
+            const exerciseKcal = document.getElementById("exerciseKcal").value;
+
+            // sessionStorage에서 데이터 가져오기
+            const userId = sessionStorage.getItem("userId");
+            const exerciseDate = sessionStorage.getItem("selectedDate");
+
+            if (!userId || !exerciseDate) {
+                alert("로그인 또는 날짜 선택 정보를 확인하세요!");
+                return;
+            }
+
+            // 최종 데이터 구성
+            const payload = {
+                userId: userId,
+                exerciseDate: exerciseDate,
+                exercisePlace: exercisePlace,
+                exerciseStage: exerciseStage,
+                exerciseCount: parseInt(exerciseCount, 10), // 정수 변환
+                exerciseTime: parseInt(exerciseTime, 10),   // 정수 변환
+                exerciseKcal: parseInt(exerciseKcal)
+            };
+
+            console.log("저장할 데이터:", payload);
+
+            // 서버로 데이터 전송
+            const response = await fetch("/api/exercise/save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                alert("운동 기록이 저장되었습니다!");
+                // 메인 페이지로 이동
+                window.location.href = "/";
+            } else {
+                alert("운동 기록 저장 실패!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="handleExerciseSave(event)">
+        <label for="exercisePlace">운동 장소:</label>
+        <input type="text" id="exercisePlace" name="exercisePlace" required>
+
+        <label for="exerciseStage">운동 단계:</label>
+        <input type="text" id="exerciseStage" name="exerciseStage" required>
+
+        <label for="exerciseCount">운동 횟수:</label>
+        <input type="number" id="exerciseCount" name="exerciseCount" required>
+
+        <label for="exerciseTime">운동 시간 (분):</label>
+        <input type="number" id="exerciseTime" name="exerciseTime" required>
+
+        <label for="exerciseKcal">소모 칼로리 (kcal):</label>
+        <input type="number" id="exerciseKcal" name="exerciseKcal" required>
+        
+        <button type="submit">운동 기록 저장</button>
+    </form>
+</body>
+</html>
