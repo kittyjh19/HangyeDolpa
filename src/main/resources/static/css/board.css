@@ -1,0 +1,400 @@
+@charset "UTF-8";
+
+/* ------------------------------------------list--------------------------------------------*/
+
+/* 기본 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f6fc; /* 매우 연한 보라색 배경 */
+    color: #4d4b57; /* 중간 회색 텍스트 */
+    text-align: center;
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: #d8c9f1; /* 부드러운 연보라색 */
+    color: #3e3a4e; /* 짙은 회보라색 텍스트 */
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #b5a3d4; /* 약간 더 짙은 보라색 */
+}
+
+/* 메인 컨테이너 */
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e3dff5; /* 매우 연한 보라 테두리 */
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: separate; /* 테두리를 둥글게 하기 위해 separate */
+    border-spacing: 0; /* 셀 간격 제거 */
+    margin: 20px 0;
+    background: rgba(216, 201, 241, 0.8); /* 투명도 추가된 연보라색 배경 */
+    border: 1px solid rgba(179, 163, 212, 0.5); /* 투명도 있는 연한 보라 테두리 */
+    border-radius: 10px; /* 테두리 둥글게 */
+    overflow: hidden; /* 테두리 밖 요소 숨김 */
+}
+
+table th, table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid rgba(240, 235, 250, 0.5); /* 투명도 있는 보라색 선 */
+}
+
+table th {
+    background-color: rgba(179, 163, 212, 0.8); /* 투명도 추가된 연보라 */
+    color: #3e3a4e; /* 짙은 회보라 텍스트 */
+    font-weight: bold;
+    text-align: center;
+}
+
+table tr:nth-child(even) {
+    background-color: rgba(244, 241, 250, 0.8); /* 매우 연한 보라색, 투명도 추가 */
+}
+
+table tr:hover {
+    background-color: rgba(236, 232, 245, 1); /* 선명한 연보라 */
+    cursor: pointer;
+    border-color: rgba(179, 163, 212, 1); /* 테두리 강조 */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+}
+
+/* 버튼 스타일 */
+button, a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #b5a3d4; /* 연보라색 버튼 */
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, a.button:hover {
+    background-color: #9f8bc2; /* 살짝 더 짙은 보라 */
+}
+
+/* 입력 폼 스타일 */
+form input, form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f8f5fc; /* 연보라 배경 */
+    color: #3e3a4e; /* 짙은 회보라 텍스트 */
+}
+
+form input[type="submit"] {
+    background-color: #b5a3d4;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #9f8bc2;
+}
+
+/* 검색창과 글쓰기 버튼을 배치하는 도구바 스타일 */
+.toolbar {
+    display: flex;
+    justify-content: space-between; /* 양 끝으로 배치 */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 검색 폼 스타일 */
+.search-form {
+    display: flex;
+    gap: 10px; /* 요소 간 간격 */
+}
+
+.search-form select,
+.search-form input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search-form input[type="submit"] {
+    background-color: #d8c9f1; /* 연보라색 */
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #b5a3d4; /* 짙은 보라색 */
+}
+
+/* 글쓰기 버튼 스타일 */
+.write-btn {
+    background-color: #d8c9f1; /* 연보라색 */
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.write-btn:hover {
+    background-color: #b5a3d4; /* 짙은 보라색 */
+}
+
+/* 선택 목록 스타일 */
+select {
+    font-size: 14px; /* 글자 크기 */
+    padding: 4px 8px; /* 위아래 여백을 줄임 */
+    border-radius: 8px; /* 둥근 테두리 */
+    border: 1px solid rgba(128, 128, 128, 0.4); /* 테두리 색상 */
+    background-color: rgba(255, 255, 255, 0.9); /* 배경색 */
+    line-height: 1.2; /* 행간 조정 */
+    height: auto; /* 높이를 글자 크기에 맞게 자동 조정 */
+    appearance: none; /* 기본 브라우저 스타일 제거 */
+    vertical-align: middle; /* 텍스트와 정렬 */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 효과 */
+}
+
+/* 선택 목록에 마우스 올렸을 때 */
+select:hover {
+    border-color: rgba(80, 80, 255, 0.8); /* 강조된 테두리 색상 */
+    box-shadow: 0 0 8px rgba(80, 80, 255, 0.4); /* 그림자 효과 */
+}
+
+/* 선택 목록 포커스 상태 */
+select:focus {
+    border-color: rgba(80, 80, 255, 1); /* 더 강한 테두리 색상 */
+    box-shadow: 0 0 12px rgba(80, 80, 255, 0.6); /* 더 강한 그림자 효과 */
+    outline: none; /* 기본 포커스 스타일 제거 */
+}
+
+/* ------------------------------------------read--------------------------------------------*/
+
+/* Read 페이지 기본 설정 */
+.read-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e3dff5; /* 매우 연한 보라 테두리 */
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* 제목 스타일 */
+.read-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4d4b57;
+    margin-bottom: 10px;
+}
+
+/* 구분선 스타일 */
+.read-container hr {
+    border: 0;
+    height: 1px;
+    background: rgba(216, 201, 241, 0.5); /* 연보라 */
+    margin: 20px 0;
+}
+
+/* 내용 스타일 */
+.read-container p {
+    margin: 10px 0;
+    color: #4d4b57;
+}
+
+/* 작성자, 등록일, 수정일 스타일 */
+.read-container p span {
+    font-weight: bold;
+    color: #3e3a4e; /* 짙은 회보라 */
+}
+
+/* 버튼 그룹 스타일 */
+.read-container .button-group {
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    gap: 10px; /* 버튼 간격 */
+    margin-top: 20px;
+}
+
+/* 삭제 및 수정 버튼 */
+.read-container button, .read-container input[type="button"] {
+    padding: 10px 20px;
+    background-color: #b5a3d4; /* 연보라 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.read-container button:hover, 
+.read-container input[type="button"]:hover {
+    background-color: #9f8bc2; /* 더 짙은 보라 */
+}
+
+/* content 스타일 (수정) */
+.read-container .content {
+    
+    min-height: 200px; /* 내용 부분 최소 높이 설정 */
+   
+}
+
+/* 작성자, 등록일, 수정일 스타일 */
+.read-container .info {
+    display: flex; /* 가로 정렬 */
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    gap: 20px; /* 요소 간 간격 */
+    font-size: 12px; /* 글자 크기 조정 */
+    color: #6b6a76; /* 연한 회색 텍스트 */
+    margin-top: 20px; /* 상단 여백 */
+}
+
+/* 댓글 영역 스타일 */
+.comment-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f6fc; /* 연한 보라색 배경 */
+    border: 1px solid #e3dff5; /* 연보라 테두리 */
+    border-radius: 8px;
+}
+
+.comment-section h3 {
+    margin-bottom: 15px;
+    color: #4d4b57;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: none;
+    font-size: 14px;
+}
+
+.comment-form button {
+    width: 100px;
+    padding: 10px;
+    background-color: #b5a3d4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    align-self: flex-end;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: #9f8bc2;
+}
+
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-list li {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e3dff5;
+}
+
+.comment-list strong {
+    color: #3e3a4e;
+}
+
+.comment-list small {
+    display: block;
+    color: #6b6a76;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+/* -----------------------------------------modify--------------------------------------------*/
+
+/* 입력 필드 스타일 */
+.input-field, .textarea-field, .readonly-field {
+    width: 100%; /* 가로 크기 */
+    padding: 10px; /* 여백 */
+    margin-top: 5px; /* 위쪽 간격 */
+    border: 1px solid #ccc; /* 기본 테두리 */
+    border-radius: 5px; /* 둥근 테두리 */
+    font-size: 14px; /* 글자 크기 */
+    box-sizing: border-box; /* 테두리를 포함한 크기 계산 */
+}
+
+.textarea-field {
+    min-height: 100px; /* 텍스트 영역 최소 높이 */
+    resize: vertical; /* 세로 크기 조절 가능 */
+}
+
+.readonly-field {
+    background-color: #f8f8f8; /* 읽기 전용 필드 배경 */
+    color: #6b6a76; /* 연한 텍스트 색상 */
+    cursor: not-allowed; /* 마우스 커서 변경 */
+}
+
+/* 버튼 그룹 스타일 (수정) */
+.read-container .button-group {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    gap: 10px; /* 버튼 간 간격 */
+    margin-top: 20px;
+}
+
+/* Modify 페이지 버튼 스타일 */
+.read-container .modify-button-group button,
+.read-container .modify-button-group input[type="button"] {
+    width: 15%; /* 버튼 크기 */
+    padding: 10px;
+    background-color: #b5a3d4; /* 연보라색 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.read-container .modify-button-group button:hover,
+.read-container .modify-button-group input[type="button"]:hover {
+    background-color: #9f8bc2; /* 짙은 보라색 */
+}

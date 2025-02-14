@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.hanGyeDolpa.mapper.CommentMapper">
+    <select id="getCommentsByBno" resultType="commentVO">
+        SELECT BOARD_NO as bno,
+        	   USER_ID as userId,
+        	   CONTENT as content,
+        	   REGDATE 
+        FROM COMMENTS_TABLE 
+        WHERE BOARD_NO = #{bno} 
+        ORDER BY REGDATE DESC
+    </select>
+    
+    <insert id="insertComment">
+        INSERT INTO COMMENTS_TABLE (CNO,BOARD_NO, USER_ID, CONTENT, REGDATE)
+        VALUES (NEXTVAL(CNO_seq), #{bno}, #{userId}, #{content}, NOW())
+    </insert>
+    
+    <select id="getCommentsByBnoandName" resultMap="getCmtUserNameListMap">
+        SELECT C.BOARD_NO,
+        	   C.USER_ID,
+        	   C.CONTENT,
+        	   C.REGDATE,
+        	   COALESCE(U.USER_NAME, '알 수 없음') AS USER_NAME
+        FROM COMMENTS_TABLE C
+        LEFT JOIN USER_TABLE U ON C.USER_ID = U.USER_NO
+        WHERE BOARD_NO = #{bno} 
+        ORDER BY REGDATE DESC
+    </select>
+    
+   	<resultMap id="getCmtUserNameListMap" type="commentVO">
+		<result property="cno" column="CNO"/>
+		<result property="bno" column="BOARD_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="content" column="CONTENT"/>
+		<result property="regdate" column="REGDATE"/>
+		<result property="userName" column="USER_NAME"/>
+	</resultMap>
+</mapper>

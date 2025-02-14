@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+   	<script type="javascript"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 라이브러리 추가 -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="/js/dashboard.js" defer></script>
+
+</head>
+
+<body>
+   <!-- header id 추가  -->
+        <div id = "top"></div> 
+        <div id="header"></div>
+        <div id="service">
+
+    <main>
+
+
+        <h2>출석체크</h2>
+        <!-- <h2 id="top" style="margin-top: 70px;">출석체크</h2> -->
+
+
+        <!-- 출석체크 히트맵 그래프 -->
+        <section id="calendarSection">
+            <div id="commitHeatmap"></div> 
+        </section>
+
+        <!-- 누적 난이도 그래프 -->
+        <section id="stats-section" class="flex-container">
+            <div id="monthly-stats">
+                <div id="monthlyDataSection">
+                </div>
+                <hr>
+                <div id="monthlyHighstScoreData"></div>
+            </div>
+            <div id="graphSection">
+                <h2>누적 난이도 그래프</h2>
+                    <span id="aboutDifficultySpan">난이도 기준🔎</span>
+
+                    <!-- 난이도 이미지 보여주기 -->
+                    <div id="aboutDifficultyimg">
+                        <img src="/img/aboutDifficultyimg.png"></img>
+                    </div>
+
+                
+                    <p style="font-size: 12px; color: gray;">※난이도는 더클라임 기준입니다.</p>
+
+                    <!-- 난이도 차트 -->
+                    <div id="difficultyChart"></div>
+            </div>
+        </section>
+        
+
+
+        <div style="text-align: right; margin-top: 20px;">
+            <button id="view-records-btn" onclick="location.href='/exercise'">운동 기록 조회</button>
+        </div>
+    </main>
+    </div>
+
+    <!-- 위로가기 
+    <div style="position: fixed; bottom: 20px; right: 20px;">
+        <a href="#header">
+            <img src="/img/upRow.png" title="위로 가기" style="width: 40px; height: 40px;">
+        </a>
+    </div>
+     -->
+
+     <!--위로가기 -->
+     <div style="position: fixed; bottom: 20px; right: 20px;">
+        <a href="#top">
+            <img src="/img/upRow.png" title="위로 가기" style="width: 80px; height: 80px;">
+        </a>
+    </div>
+
+
+
+
+    <!-- footer id 추가  -->
+
+        <div id="footer"></div>
+
+
+    <!-- 외부 html 불러오기 -->
+    <!-- 1) header.html -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous">
+    </script>
+    <script>
+        $(function(){
+            $("#header").load("../header.html");
+        })
+    </script>
+
+    <!-- 2) footer.html -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous">
+    </script>
+    <script>
+        $(function(){
+            $("#footer").load("../footer.html");
+        })
+    </script>
+
+    
+
+
+
+
+
+
+
+</body>
+
+</html>
