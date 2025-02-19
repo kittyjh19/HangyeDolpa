@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>운동 기록 관리</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/exercise.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>운동 기록 관리</h1>
+    </header>
+    <main>
+        <!-- 달력 및 운동 기록 섹션 -->
+        <section style="display: flex; justify-content: space-between;">
+            <!-- 달력 영역 -->
+            <div id="calendar-section" style="width: 45%;">
+                <h2>날짜 선택</h2>
+                <div id="calendar-header">
+                    <button id="prev-month-btn">&lt;</button>
+                    <h2 id="calendar-title"></h2>
+                    <button id="next-month-btn">&gt;</button>
+                </div>
+                <div id="calendar-days" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;"></div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="record-button" class="record-button">운동 기록하기</button>
+                </div>
+            </div>
+
+            <!-- 운동 기록 영역 -->
+            <div id="exercise-records" style="width: 45%; margin-left: 20px;">
+                <h2>운동 기록</h2>
+                <div id="records-container">
+                    <p>운동 기록이 없습니다. 날짜를 선택하세요.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 대시보드로 돌아가기 -->
+        <section style="margin-top: 20px;">
+            <button onclick="location.href='/dashboard'" class="back-button">&#8592; 대시보드로 돌아가기</button>
+        </section>
+    </main>
+</body>
+</html>

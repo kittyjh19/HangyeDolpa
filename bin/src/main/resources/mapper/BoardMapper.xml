@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  연결할 인터페이스 정보를 namespace에 기술 -->
+<mapper namespace="com.koreait.hanGyeDolpa.mapper.BoardMapper">
+	<sql id="criteria">
+		<if test="type != null and keyword != null">
+			<trim prefix="AND ">
+				<choose>
+					<when test="type=='T'.toString()">
+						BOARD_TITLE LIKE CONCAT('%',#{keyword}, '%')
+					</when>
+					<when test="type=='C'.toString()">
+						BOARD_CONTENT LIKE CONCAT('%',#{keyword}, '%')
+					</when>
+				</choose>
+			</trim>        
+		</if>
+	</sql>
+	
+	<insert id="insert">
+		INSERT INTO BOARD_TABLE(BOARD_NO, BOARD_TITLE,BOARD_CONTENT,USER_ID,BOARD_DATE)
+		VALUES(NEXTVAL(BOARD_NO_seq),#{title},#{content},#{userId},"2025-02-03")
+	</insert>
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+			SELECT NEXTVAL(BOARD_NO_seq) FROM DUAL
+		</selectKey>
+		INSERT INTO BOARD_TABLE(BOARD_NO, BOARD_TITLE,BOARD_CONTENT,USER_ID)
+		VALUES( #{bno},#{title},#{content},#{userId})
+	</insert>
+	
+	<select id="get" resultType="boardVO">
+		<![CDATA[
+		SELECT BOARD_NO AS bno,
+			   BOARD_TITLE AS title, 
+			   BOARD_CONTENT AS content, 			    
+			   BOARD_DATE AS regdate,
+			   USER_ID AS userId,
+			   BOARD_CNT AS boardCnt
+		FROM   BOARD_TABLE
+		WHERE  BOARD_NO = #{bno}
+		]]>
+	</select>
+	
+	<select id="getList" resultType="boardVO">
+		<![CDATA[
+		SELECT BOARD_NO AS bno,
+			   BOARD_TITLE AS title, 
+			   BOARD_CONTENT AS content, 			    
+			   BOARD_DATE AS regdate,
+			   USER_ID AS userId,
+			   BOARD_CNT AS boardCnt
+		FROM   BOARD_TABLE
+		WHERE  BOARD_NO > 0
+		]]>
+	</select>
+	
+	<select id="getListWithKey" resultType="boardVO">
+		<![CDATA[
+		SELECT BOARD_NO AS bno,
+			   BOARD_TITLE AS title, 
+			   BOARD_CONTENT AS content, 			    
+			   BOARD_DATE AS regdate,
+			   USER_ID AS userId,
+			   BOARD_CNT AS boardCnt
+		FROM   BOARD_TABLE
+		WHERE  BOARD_NO > 0
+		]]>
+		<include refid="criteria"></include>
+	</select>
+	
+	<update id="update">
+		UPDATE BOARD_TABLE
+		SET BOARD_TITLE = #{title}, BOARD_CONTENT = #{content}, <!-- , USER_ID = #{userId} -->
+			BOARD_UPDATEDATE = SYSDATE()
+		WHERE BOARD_NO= #{bno}
+	</update>
+	<update id="updateViewCount">
+		UPDATE BOARD_TABLE
+		SET BOARD_CNT = BOARD_CNT + 1
+		WHERE BOARD_NO = #{bno}
+	</update>
+	<delete id="delete">
+		DELETE FROM BOARD_TABLE
+		WHERE  BOARD_NO = #{bno}
+	</delete>
+	
+</mapper>

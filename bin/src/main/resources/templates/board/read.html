@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Read</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="read-container">
+        <h1 th:text="${vo.title}"></h1>
+        <hr>
+        <p th:text="${vo.content}" class="content"></p>
+        
+        <div class="info">
+	        <p><span>작성자:</span> [[${vo.userId}]]</p>
+	        <p><span>등록일:</span> [[${vo.regdate}]]</p>
+	        <p><span>수정일:</span> [[${vo.updatedate}]]</p>
+        </div>
+        
+        <div class="button-group">
+            <form action="/board/remove" method="post">
+                <input type="hidden" name="bno" th:value="${vo.bno}">
+                <button type="submit">삭제</button>
+            </form>
+            <input type="button" onclick="update()" value="수정">
+        </div>
+    </div>
+</body>
+<script th:inline="javascript">
+    function update() {
+        let bno = [[${vo.bno}]];
+        location.href = "/board/modify?bno=" + bno;
+    }
+</script>
+</html>

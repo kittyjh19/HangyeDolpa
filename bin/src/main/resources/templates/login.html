@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>로그인</title>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const userId = document.getElementById("userId").value;
+
+            // 로그인 정보 저장 (sessionStorage 활용)
+            sessionStorage.setItem("userId", userId);
+            alert("로그인 성공! 사용자 ID: " + userId);
+
+            // 다음 페이지로 이동
+            window.location.href = "/exercise";
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="handleLogin(event)">
+        <label for="userId">사용자 ID:</label>
+        <input type="text" id="userId" name="userId" required>
+        <button type="submit">로그인</button>
+    </form>
+</body>
+</html>
