@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 목록</title>
+
+    <!-- 파비콘 -->
+        <link rel="icon" href="/img/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <style>
+    	@media (max-width: 918px){
+    		.hide {
+    			display: none;
+    		}
+    	}
+    </style>
+    
+</head>
+<body>
+<div style = "height: 240px"></div>
+    <header>
+        <h1>게시판 목록</h1>
+    </header>
+    
+    <!-- header id 추가  -->
+    <div id="header"></div>
+    
+    <main>
+   		 <!-- 제목, 검색어 입력창, 검색버튼 -->	
+           <div class="toolbar">
+            <form method="get" action="/board/list" class="search-form">
+               <select id="search-type" name="type">
+                    <option value="T">제목</option>
+                    <option value="C">내용</option>
+                </select>
+                
+                <!--  검색 입력창, 검색버튼 -->
+                <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요">
+                <input type="submit" id="searchKeyword" value="검색">
+            </form>
+            <input type="button" id="write" value="글쓰기" class="write-btn">
+        </div>
+		
+        <table id="boardListTable">
+            <thead>
+                <tr>
+                    <th class="hide">번호</th>
+                    <th>제목</th>
+                    <th class="hide">작성자</th>
+                    <th>작성일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="board : ${list}">
+                    <td th:text="${board.bno}" class="hide">1</td>
+                    <td><a th:text="${board.title}" th:href="@{/board/read(bno=${board.bno})}"></a></td>
+                    <td th:text="${board.userName}" class="hide">작성자</td>
+                    <td th:text="${#dates.format(board.regdate, 'yyyy-MM-dd')}">2023-01-01</td>
+                    <td th:text="${board.boardCnt}">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    
+     <!--위로가기 -->
+     <div style="position: fixed; bottom: 20px; right: 47%;">
+        <a href="#top">
+            <img src="/img/upRow.png" title="위로 가기" style="width: 40px; height: 40px;">
+        </a>
+    </div>
+    
+    <!-- footer id 추가  -->
+    <div id="footer"></div>
+
+</body>
+<script th:inline="javascript">
+    var btn = document.getElementById("write");
+
+    btn.addEventListener("click", function () {
+        // alert("Button Pressed");
+        location.href = "/board/user/register";
+    });
+
+    var msg = [[${msg}]];
+    if (msg) {
+        alert(msg);
+    }
+    
+</script>
+
+<!-- 외부 html 연결 -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous">
+</script>
+<script>
+    $(function(){
+        $("#header").load("../header.html");
+        $("#footer").load("../footer.html");
+    })
+</script>
+
+</html>

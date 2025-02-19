@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>한계돌파</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+        /* 테이블 전체를 움직이게 하는 애니메이션 */
+        @keyframes slide {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* 테이블 컨테이너 */
+        #table-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+        }
+
+        /* 움직이는 테이블 */
+        #movingTable {
+            display: flex;
+            animation: slide 60s linear infinite;
+            width: 200%;
+        }
+
+        /* 테이블 요소 스타일 */
+        table {
+            border-collapse: collapse;
+            min-width: 100%;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* 이미지 스타일 */
+        #unKnownThings-IMG {
+            width: 350px;
+            height: 350px;
+        }
+
+        /* 반응형 속도 조절 */
+        @media screen and (max-width: 768px) {
+            #movingTable {
+                animation-duration: 60s;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            #movingTable {
+                animation-duration: 60s;
+            }
+        }
+    </style>
+
+    <!-- 파비콘 설정 -->
+    <link rel="icon" href="/img/logo.png" type="image/png">
+</head>
+
+<body>
+	<div style="height:200px;"></div>
+    <div id="header"></div>
+    <div id="service" class="col-md-12">    
+        <div class="banner">
+            <a href="eventPage" id="eventATag"><img id="myCanvas" width="1180px" height="440px"></a>
+        </div>
+
+        <form id="mainPageBTN-Form" action="https://place.map.kakao.com/807578478">
+            <button class="btn" id="mainPageBTN-BTN">!수란's PICK!</button>
+        </form>
+
+        <!-- 테이블을 감싸는 컨테이너 -->
+        <div id="table-container">
+            <div id="movingTable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>더클라임 강남점</th>
+                            <th>손상원클라이밍짐 강남점</th>
+                            <th>클라이밍파크 강남점</th>
+                            <th>클라임이모션 강남점</th>
+                            <th>무중력 클라이밍</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://place.map.kakao.com/807578478"><img id="unKnownThings-IMG" src="/img/place01.png"/></a></td>
+                            <td><a href="https://place.map.kakao.com/2029401912"><img id="unKnownThings-IMG" src="/img/place02.png"/></a></td>
+                            <td><a href="https://place.map.kakao.com/2029901090"><img id="unKnownThings-IMG" src="/img/place03.png"/></a></td>
+                            <td><a href="https://place.map.kakao.com/24126603"><img id="unKnownThings-IMG" src="/img/place04.png"/></a></td>
+                            <td><a href="https://place.map.kakao.com/1589701932"><img id="unKnownThings-IMG" src="/img/place05.png"/></a></td>
+                            <td><a href="https://place.map.kakao.com/239953917"><img id="unKnownThings-IMG" src="/img/place06.png"/></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div id="footer"></div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" 
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+        crossorigin="anonymous"></script>
+<script th:inline="javascript">
+    $(function(){
+        $("#header").load("../header.html");
+        $("#footer").load("../footer.html");
+    });
+
+    // 배너 이미지 변경 기능
+    const img = document.getElementById("myCanvas");
+
+    var pics = [
+        "../img/banner01.png",
+        "../img/banner02.png",
+        "../img/banner03.png"
+    ];
+
+    var count = 0;
+    img.src = pics[count % pics.length];
+
+    setInterval(function () {
+        count++;
+        img.src = pics[count % pics.length];
+    }, 2000);
+</script>
+</html>

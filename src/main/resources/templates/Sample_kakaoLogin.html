@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <!-- 파비콘 -->
+    <link rel="icon" href="/img/logo.png" type="image/png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            width: 800px;
+            height: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .login-container {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5dc;
+            padding: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            width: 60px;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .logo-container a {
+            text-decoration: none;
+            font-size: 24px;
+            color: black;
+            font-weight: bold;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .login-container a img {
+            width: 210px;
+            cursor: pointer;
+        }
+
+        .background-container {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('/img/banner01.png') no-repeat center center/cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="logo-container">
+                <a href="/main">
+                    <img src="/img/logo.png" alt="한계돌파">
+                </a>
+                <a href="/main"></a>
+            </div>
+            <a th:href="${location}">
+                <img src="/img/kakao_login_medium_narrow.png" alt="카카오 로그인" >
+            </a>
+        </div>
+        <div class="background-container"></div>
+    </div>
+</body>
+</html>

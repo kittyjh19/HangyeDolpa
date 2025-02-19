@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 수정 </title>
+    
+    <!-- 파비콘 설정 -->
+    <link rel="icon" href="/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+</head>
+ 
+<body>
+	<!-- header id 추가  -->
+   	<div id="header"></div>
+	<div style = "height: 225px;"></div>
+   	
+    <div class="read-container">
+    
+        <!-- 제목 -->
+        <h1>글 수정</h1>
+        <hr>
+        
+        <!-- 수정 폼 -->
+        <form action="/board/user/modify" method="post">
+            <!-- 제목 -->
+            <p>
+                <label for="title"><strong>제목:</strong></label>
+                <input type="text" id="title" name="title" th:field="${board.title}" class="input-field">
+            </p>
+            
+            <!-- 내용 -->
+            <p class="content">
+                <label for="content"><strong>내용:</strong></label>
+                <textarea id="content" name="content" th:field="${board.content}" class="textarea-field"></textarea>
+            </p>
+            
+            <!-- 작성자, 등록일 -->
+            <div class="info">
+                <span><strong>작성자:</strong> <input type="text" name="userName" th:field="${board.userName}" readonly class="readonly-field"></span>
+                <span><strong>등록일:</strong> <input type="text" name="regdate" th:field="${board.regdate}" readonly class="readonly-field"></span>
+            </div>
+            
+            <!-- 숨겨진 필드 -->
+            <input type="hidden" name="bno" th:field="${board.bno}">
+            
+            <!-- 버튼 그룹 -->
+            <div class="modify-button-group">
+                <button type="submit">수정 완료</button>
+                <input type="button" onclick="cancel()" value="취소">
+            </div>
+        </form>
+    </div>
+    <!-- footer id 추가  -->
+    <div id="footer"></div>
+
+</body>
+
+<script th:inline="javascript">
+    function cancel() {
+        location.href = "/board/list";
+    }
+</script>
+
+<!-- 외부 html 불러오기 -->
+<!-- 1) header.html -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous">
+</script>
+<script>
+    $(function(){
+        $("#header").load("../../header.html");
+		$("#footer").load("../../footer.html");
+    })
+</script>
+
+</html>

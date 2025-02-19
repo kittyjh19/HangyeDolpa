@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>작성 글 조회</title>
+    
+     <!-- 파비콘 설정 -->
+    <link rel="icon" href="/img/logo.png" type="image/png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+</head>
+<style>
+   ul {
+      list-style: none;
+   }
+</style>
+<body>
+    <div class="read-container">
+        <h1 th:text="${board.title}"></h1>
+        <hr>
+        <p th:text="${board.content}" class="content"></p>
+
+        <div class="info">
+            <p><span>작성자:</span> [[${board.userName}]]</p>
+            <p><span>등록일:</span> [[${board.regdate}]]</p>
+            <p><span>수정일:</span> [[${board.updatedate}]]</p>
+        </div>
+
+        <div class="uploadResult">
+            <h3>첨부파일</h3>
+            <ul></ul>
+        </div>
+        
+        <div class="comment-section">
+           <h3>댓글</h3>
+           
+           <!-- 댓글 작성 폼 -->
+           <form action="/board/user/comment" method="post" class="comment-form">
+               <input type="hidden" name="bno" th:value="${board.bno}">
+               <input type="hidden" name="userId" th:value="${board.userId}">
+               <textarea name="content" placeholder="댓글을 입력하세요..." required></textarea>
+               <button type="submit">댓글 작성</button>
+           </form>
+           
+           <!-- 댓글 목록 -->
+           <ul class="comment-list">
+               <li th:each="comment : ${comments}">
+                   <strong th:text="${comment.userName}"></strong>
+                   <span th:text="${comment.content}"></span>
+                   <small th:text="${#dates.format(comment.regdate, 'yyyy-MM-dd HH:mm')}"></small>
+               </li>
+           </ul>
+       </div>
+
+        <div class="button-group" id="needLoginBtn">
+            <form action="/board/user/remove" method="post" style="display: flex;">
+                <input type="hidden" name="bno" th:value="${board.bno}">
+                <button id="needLoginBtn" type="submit" style="margin-right:8px;">삭제</button>
+                <button id="updateBtn" style="margin-right: 8px;">수정</button>
+                <button id="getListBtn">목록</button>
+            </form>
+
+        </div>
+    </div>
+    
+    <!-- footer id 추가  -->
+    <div id="footer"></div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script th:inline="javascript">
+   const bno = [[${board.bno}]];
+   const needLoginBtn = document.getElementById("needLoginBtn");
+   
+   checkReaderANDUserNo();// 글쓴이와 읽는이가 동일하면 버튼 활성화
+   
+   var msg = [[${msg}]];
+   if (msg) {
+       alert(msg);
+   }
+
+   $("#updateBtn").on("click", function(e){
+	   console.log("AAAAA");
+		e.preventDefault();
+		update();
+   });
+   
+   $("#getListBtn").on("click", function(e){
+	   console.log("AAAAA");
+		e.preventDefault();
+		goList();
+   });
+   
+    function goList(){
+        location.href = "/board/list";
+    }
+
+    function update() {
+        location.href = "/board/user/modify?bno=" + bno;
+    }
+    
+    function checkReaderANDUserNo(){
+       const query = "/board/user/checkReaderANDUserNo?bno=" + bno;
+       fetch(query)
+           .then(response => response.text())
+           .then(data => {
+               console.log(data);
+               
+                if (data.trim() === "true") {
+                    needLoginBtn.style.display = "block";  // 버튼 보이게 설정
+                } else {
+                    needLoginBtn.style.display = "none";   // 버튼 숨기기 (혹시나 해서)
+                }
+           })
+           .catch(error => console.error("Error:", error));
+    }
+
+    let ul = $(".uploadResult ul");
+
+    $.getJSON("/board/getAttachList", { bno: bno }, function(arr){
+        let str = "";
+
+        $(arr).each(function(i, attach){
+            let fname = attach.uploadPath + "/" + attach.fileName;
+            console.log(fname);
+
+            let filePath = "/upload/display?fileName=" + encodeURIComponent(fname);
+
+            str += "<li style='list-style: none;'>";
+
+            // ✅ 이미지 파일이면 <img> 태그 사용
+            if (attach.image) {
+               // console.log("이미지에요~");
+                str += "<img src='" + filePath + "' width='200px'>";
+            }
+            // ✅ 동영상 파일이면 <video> 태그 사용
+            else if (attach.vid) {
+                str += "<video width='400px' controls>";
+                str += "<source src='" + filePath + "' type='video/mp4'>";
+                str += "브라우저가 동영상을 지원하지 않습니다.";
+                str += "</video>";
+            }
+            str += "</li>";
+        });
+
+        $(".uploadResult ul").html(str);
+    });
+
+</script>
+
+    <!-- 외부html : header, footer 추가  -->
+      <script>
+   $(function(){
+      $("#header").load("../header.html");
+      $("#footer").load("../footer.html");   
+   })
+   </script>
+</html>
